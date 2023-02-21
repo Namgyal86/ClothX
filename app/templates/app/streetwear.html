@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <div class="list-group">
+        <a href="{% url 'streetwear' %}" class="list-group-item list-group-item-action" aria-current="true">All street wear</a>
+        <a href="{% url 'streetweardata' 'LOCO'%}" class="list-group-item list-group-item-action" aria-current="true">LOCO</a>
+        <a href="{% url 'streetweardata' 'KP'%}" class="list-group-item list-group-item-action" aria-current="true">KP</a>
+        <a href="{% url 'streetweardata' 'below'%}" class="list-group-item list-group-item-action" aria-current="true">below 1000</a>
+        <a href="{% url 'streetweardata' 'above'%}" class="list-group-item list-group-item-action" aria-current="true">above 5000</a>
+    </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+        {% for product in streetwear %}
+        <div class="col-sm-4 text-center mb-4">
+            <a herf="{% url 'product-detail' product.id %}" class="btn">
+                <div class="item">
+                    <img src="{{product.product_image.url}}" alt="" height="300" class="">
+                    <div class="fw-bold">{{product.title}}</div>
+                    <div class="fw-bold">Rs. {{product.selling_price}}<small class="fw-light text-decoration-line-throught">Rs.{{product.discounted_price}}</small></div>
+                </div>
+            </a>
+        </div>
+        {%endfor%}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
